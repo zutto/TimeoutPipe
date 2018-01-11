@@ -89,18 +89,14 @@ func (t *TimeoutPipe) rwProxy() {
 
 func (t *TimeoutPipe) closePipes(e error) {
 	if e != nil {
-		t.internalReader.Close()
-		t.internalWriter.Close()
-
 		t.Reader.CloseWithError(e)
-		t.Writer.Close()
 	} else {
-		t.internalReader.Close()
-		t.internalWriter.Close()
-
 		t.Reader.Close()
-		t.Writer.Close()
 	}
+
+	t.internalReader.Close()
+	t.internalWriter.Close()
+	t.Writer.Close()
 }
 
 //
